@@ -9,6 +9,9 @@ Route::get('/', [EventControllerLogin::class, 'index']);
 
 Route::get('/events/create', [EventControllerLogin::class, 'create']);
 
+//criando rota para receber o post// store action padrÃO DO LARAVEL
+Route::post('/events', [EventControllerLogin::class, 'store']);
+
 //Route::post('/', [EventControllerLogins::class, 'retornos']);
 
  //pagina de contato
@@ -24,3 +27,12 @@ Route::get('/produtos', [EventProdutos::class, 'produtos']);
 Route::get('/produtos_teste/{id?}',function($id = null){
   return view('product', ['id' => $id]);
 });
+
+
+
+ //php artisan migrate crio as migration para o banco
+ //php artisan make:migration create_products_table  para criar uma migration, depois o php artisan make:migrate
+//php artisan migrate:fresh para deletar e subir informacoes no banco de dados
+
+  //migration para adicionar somente o campo que preciso.
+  //migr
