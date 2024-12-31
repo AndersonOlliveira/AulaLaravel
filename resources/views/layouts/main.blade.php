@@ -17,6 +17,9 @@
   </head>
 
  <body>
+
+
+
      <header>
      <nav class="navbar navbar-expand-lg">
      <div class="container-fluid">
@@ -31,35 +34,52 @@
           <a class="nav-link active" aria-current="page" href="/events/create">Criar Eventos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Entrar</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Cadastrar</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="/produtos">Produtos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/contato">Contato</a>
         </li>
+        @auth
+        <li class="nav-item">
+          <form action="/logout" method="post">
+           @csrf
+          <a href="/logout" class="nav-link" onclick="event.preventDefault();this.closest('form').submit();">Sair</a></form>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard">Meus Eventos</a>
+        </li>
+        @endauth
+        @guest
+        <li class="nav-item">
+          <a class="nav-link" href="/register">Cadastrar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Entrar</a>
+        </li>
+        @endguest
       </ul>
     </div>
   </nav>
     </header>
-   @yield('content')
-    <footer>Direitos reservados</footer>
+   <main>
+     <div class="class-containet-fluid">
+        <div class="row">
+            @if (session('msg'))
+            <p class="class-msg">
+                {{ session('msg') }}
+              </p>
+            @endif
+        </div>
+     </div>
 
-  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-
-
-<!-- conteudo a ser renderizado -->
+            <!-- conteudo a ser renderizado -->
          </main> <!-- FECHAMENTO MAIN -->
        </div> <!--  div row da container-fluid   -->
 
 
     </div> <!-- container-fluid -->
-
-
+    @yield('content')
+    <footer>Direitos reservados</footer>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
       <script src="/js/jquery/jquery/dist/jquery.min.js"></script>
       <script src="/js/popper/@popperjs/core/dist/umd/popper-base.min.js"> </script>
