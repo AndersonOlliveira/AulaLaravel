@@ -34,6 +34,10 @@ Route::get('/produtos_teste/{id?}',function($id = null){
 });
 
 
+Route::delete('/events/{id}', [EventControllerLogin::class, 'destroy'])->middleware('auth');
+Route::get('/events/edit/{id}', [EventControllerLogin::class, 'edit'])->middleware('auth');
+
+
 
  //php artisan migrate crio as migration para o banco
  //php artisan make:migration create_products_table  para criar uma migration, depois o php artisan make:migrate

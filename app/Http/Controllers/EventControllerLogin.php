@@ -110,11 +110,29 @@ class EventControllerLogin extends Controller
     $eventos = $user->events;
 
     return view('events.dashboard', ['events' => $eventos]);
+   }
 
+   //para deletar evento
 
+   public function destroy($id){
+
+      //dd($id);
+      //quando acontecer que metodo nao suportado rodar Yes try these 2 commands on ur terminal: php artisan route:clear e php artisan optimize
+     Event::findOrFail($id)->delete();
+
+     return redirect('/dashboard')->with('msg', 'Evento Excluido com sucesso!');
 
    }
 
+   public function edit($id){
+
+      //aqui vou editar o evento
+
+      $eve = Event::findOrFail($id);
+
+      return view('events.edit', ['evento' => $eve]);
+
+   }
 
     private function processar($even,$eventOwner){
 

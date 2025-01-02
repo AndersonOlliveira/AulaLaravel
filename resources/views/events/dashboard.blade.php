@@ -4,7 +4,9 @@
 
 @section('content')
 
-
+@if(session('msg'))
+   <p>{{session('msg')}}</p>
+@endif
 <div class="col-md-10 offset-md-1 dashboard-title-container">
 <h1>Meu Eventos</h1>
 
@@ -28,7 +30,12 @@
                 <th scope="row"> {{$loop->index +1}}</th>
                 <td><a href="/events/{{$resultEvent->id}}">{{$resultEvent->title}}</a></td>
                 <td>0</td>
-                <td><a href="#">Editar</a> <a href="#">Deletar</td>
+                <td><a href="/events/edit/{{$resultEvent->id}}" class="btn btn-info edit-btn">Editar</a>
+                 <form action="/events/{{$resultEvent->id}}" method="post">
+                 @csrf
+                    {{method_field('DELETE')}}
+                    <button type="submit" class="btn btn-danger delete-btn">Deletar</button>
+                 </form>
             </tr>
         @endforeach
      </tbody>
